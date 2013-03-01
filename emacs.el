@@ -55,5 +55,7 @@
     (setq fci-rule-color "darkblue")
     (setq fci-rule-column 80) ))
 
-(setq rcirc-server-alist `((,(my-config '(:rcirc :server)) :channels ())))
-(setq rcirc-default-nick (my-config '(:rcirc :nic)))
+(setq rcirc-auto-authenticate-flag t)
+(setq rcirc-authenticate-before-join t)
+(setq rcirc-server-alist (list (my-config '(:rcirc :server-alist))))
+(setq rcirc-authinfo (list (my-config '(:rcirc :authinfo))))
