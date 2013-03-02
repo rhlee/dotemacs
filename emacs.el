@@ -13,8 +13,6 @@
             subnode)))))))
     (funcall recurse recurse node path)))
 
-(add-to-list 'load-path "~/.emacs.d/")
-
 (defun my-config (path) (get-config user-config path))
 
 (require 'mouse)
@@ -36,24 +34,7 @@
     (indent-to i)))
 (global-set-key "\r" 'newline-keep-indent)
 
-(if (eq system-type 'cygwin)
-  ()
-  (progn
-    (require 'dirtree)
-    (require 'nav)
-    (require 'sml-modeline)
-    (require 'fill-column-indicator)
-
-    (defun copy-to-x-clipboard ()
-      (interactive)
-      (with-current-buffer (current-buffer)
-      (call-process-region (region-beginning) (region-end) "xclip" nil 0 nil "-selection" "clipboard")))
-
-    (setq epa-armor t)
-
-    (setq fci-rule-character ?\u2502)
-    (setq fci-rule-color "darkblue")
-    (setq fci-rule-column 80) ))
+(setq epa-armor t)
 
 (setq rcirc-auto-authenticate-flag t)
 (setq rcirc-authenticate-before-join t)
