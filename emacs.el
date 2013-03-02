@@ -61,7 +61,8 @@
 (setq rcirc-authinfo (list (my-config '(:rcirc :authinfo))))
 
 (defun switch-to-autojoin (process sender response target text)
-  (when (string= target "#test")
+  (when (string= target 
+      (car (plist-get (cdr (my-config '(:rcirc :server-alist))) :channels)))
     (switch-to-buffer (current-buffer))
     (remove-hook 'rcirc-print-hooks 'switch-to-autojoin))
   nil)
