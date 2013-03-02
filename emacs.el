@@ -1,6 +1,6 @@
 (load-file (concat
   (file-name-directory (file-chase-links load-file-name))
-  "user-config.el"))
+  "temp.el"))
 
 (defun get-config (node path)
   (let ((recurse (lambda (f node path)
@@ -48,4 +48,16 @@
     (remove-hook 'rcirc-print-hooks 'switch-to-autojoin))
   nil)
 
+(defun rcirc-notify (process sender response target text)
+  (when (string= response "PRIVMSG")
+    (progn
+    (if (string-match
+        (buffer-local-value 'rcirc-nick
+          (buffer-local-value 'rcirc-server-buffer (current-buffer)))
+        text)
+      (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
+      (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav"))))
+  nil)
+
 (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
+(add-hook 'rcirc-print-hooks 'rcirc-notify)
