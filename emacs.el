@@ -1,6 +1,6 @@
 (load-file (concat
   (file-name-directory (file-chase-links load-file-name))
-  "temp.el"))
+  "user-config.el"))
 
 (defun get-config (node path)
   (let ((recurse (lambda (f node path)
