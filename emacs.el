@@ -59,3 +59,11 @@
 (setq rcirc-authenticate-before-join t)
 (setq rcirc-server-alist (list (my-config '(:rcirc :server-alist))))
 (setq rcirc-authinfo (list (my-config '(:rcirc :authinfo))))
+
+(defun switch-to-autojoin (process sender response target text)
+  (when (string= target "#test")
+    (switch-to-buffer (current-buffer))
+    (remove-hook 'rcirc-print-hooks 'switch-to-autojoin))
+  nil)
+
+(add-hook 'rcirc-print-hooks 'switch-to-autojoin)
