@@ -49,12 +49,13 @@
   nil)
 
 (defun rcirc-notify (process sender response target text)
-  (when (string= response "PRIVMSG")
-    (let ((user-nick (buffer-local-value 'rcirc-nick
-        (buffer-local-value 'rcirc-server-buffer (current-buffer)))))
-      (if (string-match user-nick text)
-        (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
-        (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav"))))
+  (let ((user-nick (buffer-local-value 'rcirc-nick
+      (buffer-local-value 'rcirc-server-buffer (current-buffer)))))
+    (when (and (string= response "PRIVMSG")(not (string= user-nick sender)))
+      (progn
+        (if (string-match user-nick text)
+          (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
+          (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav")))))
   nil)
 
 (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
