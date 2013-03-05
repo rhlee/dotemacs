@@ -54,9 +54,24 @@
     (when (and (string= response "PRIVMSG")(not (string= user-nick sender)))
       (progn
         (if (string-match user-nick text)
-          (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
-          (start-process "ls" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav")))))
+          (start-process "play" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
+          (if (not quiet-mode-flag)
+            (start-process
+              "play" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav"))))))
   nil)
+
+(defvar quiet-mode-flag nil)
+
+(defun quiet-mode ()
+  (interactive)
+  (if quiet-mode-flag
+    (progn
+      (setq quiet-mode-flag nil)
+      (message "quiet mode off"))
+    (progn 
+      (setq quiet-mode-flag t)
+      (message "quiet mode on"))))
+  
 
 (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
 (add-hook 'rcirc-print-hooks 'rcirc-notify)
