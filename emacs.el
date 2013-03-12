@@ -71,7 +71,17 @@
     (progn 
       (setq quiet-mode-flag t)
       (message "quiet mode on"))))
-  
 
 (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
 (add-hook 'rcirc-print-hooks 'rcirc-notify)
+
+(defun copy ()
+  (interactive)
+  (shell-command-on-region
+    (region-beginning) (region-end)
+      (if (eq system-type 'cygwin) "putclip" "xsel -ib") nil nil nil t))
+
+(defun paste ()
+  (interactive)
+  (insert (shell-command-to-string
+    (if (eq system-type 'cygwin) "getclip" "xsel -ob"))))
