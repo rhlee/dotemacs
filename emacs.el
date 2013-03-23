@@ -39,7 +39,7 @@
 (setq rcirc-auto-authenticate-flag t)
 (setq rcirc-authenticate-before-join t)
 (setq rcirc-server-alist (list (my-config '(:rcirc :server-alist))))
-(setq rcirc-authinfo (list (my-config '(:rcirc :authinfo))))
+(setq rcirc-authinfo (my-config '(:rcirc :authinfo)))
 
 (defun switch-to-autojoin (process sender response target text)
   (when (string= target 
@@ -90,3 +90,8 @@
 				  (nnimap-address "imap.gmail.com")
 				  (nnimap-server-port 993)
 				  (nnimap-stream ssl)))
+
+(defun freenode ()
+  (interactive)
+  (setq rcirc-server-alist (list (my-config '(:rcirc :freenode))))
+  (rcirc nil))
