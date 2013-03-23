@@ -85,3 +85,8 @@
   (interactive)
   (insert (shell-command-to-string
     (if (eq system-type 'cygwin) "getclip" "xsel -ob"))))
+
+(setq gnus-select-method '(nnimap "gmail"
+				  (nnimap-address "imap.gmail.com")
+				  (nnimap-server-port 993)
+				  (nnimap-stream ssl)))
