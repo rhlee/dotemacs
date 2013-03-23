@@ -43,7 +43,7 @@
 
 (defun switch-to-autojoin (process sender response target text)
   (when (string= target 
-      (car (plist-get (cdr (my-config '(:rcirc :server-alist))) :channels)))
+      (car (plist-get (cdr (car rcirc-server-alist)) :channels)))
     (switch-to-buffer (current-buffer))
     (remove-hook 'rcirc-print-hooks 'switch-to-autojoin))
   nil)
@@ -91,7 +91,16 @@
 				  (nnimap-server-port 993)
 				  (nnimap-stream ssl)))
 
-(defun freenode ()
-  (interactive)
-  (setq rcirc-server-alist (list (my-config '(:rcirc :freenode))))
+(show-paren-mode)
+
+(defun freenode (arg)
+  (interactive "sAuto-join channel (leave blank for none): ")
+  (setq rcirc-server-alist (list
+    (append
+      (my-config '(:rcirc :freenode))
+        (if (string= arg "")
+          nil
+          (progn
+            (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
+            (list :channels (list arg)))))))
   (rcirc nil))
