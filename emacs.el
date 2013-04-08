@@ -104,3 +104,6 @@
             (add-hook 'rcirc-print-hooks 'switch-to-autojoin)
             (list :channels (list arg)))))))
   (rcirc nil))
+
+(windmove-default-keybindings)
+(define-key input-decode-map "\e[1;2A" [S-up])
