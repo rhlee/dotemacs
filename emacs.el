@@ -131,3 +131,13 @@
       filename)))
 
 (setq rcirc-log-filename-function 'rcirc-generate-custom-log-filename)
+
+(defun rcirc-set-new-log-file ()
+  (if rcirc-target
+    (progn
+      (rcirc-log-write)
+      (remhash
+        rcirc-target
+        (gethash (get-buffer-process rcirc-server-buffer) rcirc-log-filename)))))
+
+(add-hook 'rcirc-mode-hook 'rcirc-set-new-log-file)
