@@ -107,3 +107,24 @@
 
 (windmove-default-keybindings)
 (define-key input-decode-map "\e[1;2A" [S-up])
+
+(defmacro setf-if (place if-val expr)
+  `(let ((val ,place))
+    (if (eq val ,if-val)
+      (setf ,place ,expr)
+      val)))
+
+(setq rcirc-log-flag t)
+
+(setq rcirc-log-filename (make-hash-table))
+
+(defun rcirc-generate-custom-log-filename (process target)
+  (let
+    ((filename (rcirc-generate-log-filename process target)))
+    (setf-if
+      (gethash target (setf-if (gethash process rcirc-log-filename) nil
+        (make-hash-table :test 'equal)))
+      nil
+      filename)))
+
+(setq rcirc-log-filename-function 'rcirc-generate-custom-log-filename)
