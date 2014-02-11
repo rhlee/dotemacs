@@ -120,7 +120,10 @@
 
 (defun rcirc-generate-custom-log-filename (process target)
   (let
-    ((filename (rcirc-generate-log-filename process target)))
+    ((filename
+      (concat
+        (rcirc-generate-log-filename process target)
+        (format-time-string "#%Y-%m-%d.%H%M%S"))))
     (setf-if
       (gethash target (setf-if (gethash process rcirc-log-filename) nil
         (make-hash-table :test 'equal)))
