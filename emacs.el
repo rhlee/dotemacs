@@ -142,3 +142,10 @@
           (get-buffer-process rcirc-server-buffer) rcirc-log-filename)))))
 
 (add-hook 'rcirc-mode-hook 'rcirc-set-new-log-file)
+
+(defun rcirc-write-and-close-logs (process sentinel)
+  (if (eq (process-status process) 'closed)
+    (remhash process rcirc-log-filename))
+  (rcirc-log-write))
+
+(add-hook 'rcirc-sentinel-functions 'rcirc-write-and-close-logs)
