@@ -124,7 +124,8 @@
   (let
     ((filename
       (concat
-        (rcirc-generate-log-filename process target)
+        (replace-regexp-in-string "/" "_"
+          (rcirc-generate-log-filename process target))
         (format-time-string ",%Y-%m-%d.%H%M%S"))))
     (setf-if
       (gethash target (setf-if (gethash process rcirc-log-filename) nil
