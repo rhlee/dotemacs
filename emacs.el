@@ -36,6 +36,8 @@
 
 (setq epa-armor t)
 
+(require 'rcirc)
+
 (setq rcirc-auto-authenticate-flag t)
 (setq rcirc-authenticate-before-join t)
 (setq rcirc-server-alist (list (my-config '(:rcirc :server-alist))))
@@ -149,3 +151,5 @@
   (rcirc-log-write))
 
 (add-hook 'rcirc-sentinel-functions 'rcirc-write-and-close-logs)
+
+(add-hook 'kill-emacs-hook 'rcirc-log-write())
