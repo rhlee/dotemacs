@@ -1,6 +1,10 @@
-(load-file (concat
-  (file-name-directory (file-chase-links load-file-name))
-  "user-config.el"))
+(setq user-config
+  (with-temp-buffer
+    (insert-file-contents
+      (concat
+        (file-name-directory (file-chase-links load-file-name))
+        "user-config.el"))
+    (read (current-buffer))))
 
 (defun get-config (node path)
   (let ((recurse (lambda (f node path)
