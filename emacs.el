@@ -158,3 +158,8 @@
 (add-hook 'rcirc-sentinel-functions 'rcirc-write-and-close-logs)
 
 (add-hook 'kill-emacs-hook 'rcirc-log-write())
+
+(load-file (concat
+  (file-name-directory (file-chase-links load-file-name))
+  (file-name-as-directory "timer")
+  "timer.el"))
