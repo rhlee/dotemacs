@@ -167,6 +167,7 @@
         (define-key keymap (string key) 'self-insert-command))
       (define-key keymap (string 13) 'newline-keep-indent)
       (define-key keymap (string 9) 'self-insert-command)
+      (define-key keymap (string 127) 'delete-backward-char)
       keymap))
 
 (defun newline-keep-indent ()
