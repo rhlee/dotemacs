@@ -155,3 +155,32 @@
   (file-name-directory (file-chase-links load-file-name))
   (file-name-as-directory "timer")
   "timer.el"))
+
+(defvar simple-indent-mode-autoload-list nil)
+
+(define-minor-mode simple-indent-mode
+  "Simple indentation"
+  :lighter " si"
+  :keymap
+    (let ((keymap (make-sparse-keymap)))
+      (dolist (key (number-sequence 32 126))
+        (define-key keymap (string key) 'self-insert-command))
+      (define-key keymap (string 13) 'newline-keep-indent)
+      (define-key keymap (string 9) 'self-insert-command)
+      keymap))
+
+(defun newline-keep-indent ()
+  (interactive)
+  (let
+    ((line (buffer-substring (line-beginning-position) (line-end-position))))
+    (newline)
+    (string-match "^[[:blank:]]*" line)
+    (insert (match-string 0 line))))
+
+(add-hook 'after-change-major-mode-hook
+  (lambda ()
+    (if (member major-mode simple-indent-mode-autoload-list)
+      (simple-indent-mode t))))
+
+(setq simple-indent-mode-autoload-list
+  '(emacs-lisp-mode))
