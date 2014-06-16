@@ -30,14 +30,6 @@
 (setq auto-save-file-name-transforms
   `((".*" ,temporary-file-directory t)))
 
-(setq-default indent-tabs-mode nil)
-(defun newline-keep-indent ()
-  (interactive)
-  (let ((i (min (current-indentation) (current-column))))
-    (newline)
-    (indent-to i)))
-(global-set-key "\r" 'newline-keep-indent)
-
 (setq epa-armor t)
 
 (require 'rcirc)
