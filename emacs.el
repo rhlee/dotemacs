@@ -163,11 +163,11 @@
   :lighter " si"
   :keymap
     (let ((keymap (make-sparse-keymap)))
-      (dolist (key (number-sequence 32 126))
+      (dolist (key (number-sequence ?  ?~))
         (define-key keymap (string key) 'self-insert-command))
-      (define-key keymap (string 13) 'newline-keep-indent)
-      (define-key keymap (string 9) 'self-insert-command)
-      (define-key keymap (string 127) 'delete-backward-char)
+      (define-key keymap (kbd "RET") 'newline-keep-indent)
+      (define-key keymap (kbd "TAB") 'self-insert-command)
+      (define-key keymap (kbd "DEL") 'delete-backward-char)
       keymap))
 
 (defun newline-keep-indent ()
