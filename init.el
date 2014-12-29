@@ -1,9 +1,7 @@
 (setq user-config
   (with-temp-buffer
     (insert-file-contents
-      (concat
-        (file-name-directory load-file-name)
-        "user-config.el"))
+      (concat user-emacs-directory "user-config.el"))
     (read (current-buffer))))
 
 (defun get-config (node path)
@@ -52,10 +50,17 @@
     (when (and (string= response "PRIVMSG")(not (string= user-nick sender)))
       (progn
         (if (string-match user-nick text)
-          (start-process "play" "*scratch*" "play" "~/Dropbox/rcirc/me.wav")
+          (start-process
+            "play"
+            "*scratch*"
+            "play"
+            (concat user-emacs-directory "sounds/me.wav"))
           (if (not quiet-mode-flag)
             (start-process
-              "play" "*scratch*" "play" "~/Dropbox/rcirc/msg.wav"))))))
+              "play"
+              "*scratch*"
+              "play"
+              (concat user-emacs-directory "sounds/msg.wav")))))))
   nil)
 
 (defvar quiet-mode-flag nil)
