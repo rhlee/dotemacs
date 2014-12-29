@@ -2,7 +2,7 @@
   (with-temp-buffer
     (insert-file-contents
       (concat
-        (file-name-directory (file-chase-links load-file-name))
+        (file-name-directory load-file-name)
         "user-config.el"))
     (read (current-buffer))))
 
