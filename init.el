@@ -103,9 +103,6 @@
             (list :channels (list arg)))))))
   (rcirc nil))
 
-(windmove-default-keybindings)
-(define-key input-decode-map "\e[1;2A" [S-up])
-
 (defmacro setf-if (place if-val expr)
   `(let ((val ,place))
     (if (eq val ,if-val)
