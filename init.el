@@ -187,3 +187,5 @@
 
 (setq simple-indent-mode-autoload-list
   '(emacs-lisp-mode))
+
+(windmove-default-keybindings 'meta)
