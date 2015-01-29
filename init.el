@@ -153,10 +153,11 @@
 
 (add-hook 'kill-emacs-hook 'rcirc-log-write())
 
-(load-file (concat
-  (file-name-directory (file-chase-links load-file-name))
-  (file-name-as-directory "timer")
-  "timer.el"))
+(load-file
+  (concat
+    (file-name-directory load-file-name)
+    (file-name-as-directory "timer")
+    "timer.el"))
 
 (defvar simple-indent-mode-autoload-list nil)
 
