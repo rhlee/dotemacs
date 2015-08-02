@@ -171,7 +171,8 @@
       (define-key keymap (kbd "RET") 'newline-keep-indent)
       (define-key keymap (kbd "TAB") 'self-insert-command)
       (define-key keymap (kbd "DEL") 'delete-backward-char)
-      keymap))
+      keymap)
+  :after-hook (setq post-self-insert-hook nil))
 
 (defun newline-keep-indent ()
   (interactive)
