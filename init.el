@@ -42,6 +42,12 @@
 (setq simple-indent-mode-autoload-list
   '(emacs-lisp-mode))
 
+(defun generate-header-line ()
+  buffer-file-name)
+
+(add-hook 'after-change-major-mode-hook
+  (lambda () (setq header-line-format '(:eval buffer-file-name))))
+
 (windmove-default-keybindings 'meta)
 
 (require 'package)
