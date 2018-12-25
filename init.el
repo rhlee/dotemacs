@@ -43,10 +43,13 @@
   '(emacs-lisp-mode))
 
 (defun generate-header-line ()
-  buffer-file-name)
+  (let ((path
+      (if (eq major-mode 'ranger-mode) ranger-current-file buffer-file-name)))
+    path))
 
-(add-hook 'after-change-major-mode-hook
-  (lambda () (setq header-line-format '(:eval buffer-file-name))))
+(add-hook 'buffer-list-update-hook
+  (lambda () (setq header-line-format '(:eval (generate-header-line)))))
+(setq ranger-header-func 'generate-header-line)
 
 (windmove-default-keybindings 'meta)
 
