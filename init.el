@@ -43,9 +43,19 @@
   '(emacs-lisp-mode))
 
 (defun generate-header-line ()
-  (let ((path
-      (if (eq major-mode 'ranger-mode) ranger-current-file buffer-file-name)))
-    path))
+  (let* (
+      (in-ranger-mode (eq major-mode 'ranger-mode))
+      (path (reverse (split-string
+        (if in-ranger-mode ranger-current-file buffer-file-name)
+        "/")))
+      (file (propertize (pop path) 'face '(:foreground "cyan" :weight bold)))
+      (directory
+        (propertize (pop path) 'face '(:foreground "blue" :weight bold)))
+      (directory-path (cons directory path))
+      (rendered-path
+        (if in-ranger-mode directory-path (cons file directory-path))))
+    (string-join
+      (reverse rendered-path) (propertize "/" 'face '(:weight bold)))))
 
 (add-hook 'buffer-list-update-hook
   (lambda () (setq header-line-format '(:eval (generate-header-line)))))
