@@ -34,6 +34,11 @@
     (string-match "^[[:blank:]]*" line)
     (insert (match-string 0 line))))
 
+(add-hook 'after-change-major-mode-hook
+  (lambda ()
+    (if (member major-mode simple-indent-mode-autoload-list)
+      (simple-indent-mode t))))
+
 (setq simple-indent-mode-autoload-list
   '(emacs-lisp-mode))
 
