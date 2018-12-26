@@ -67,6 +67,19 @@
   (lambda () (setq header-line-format '(:eval (generate-header-line)))))
 (setq ranger-header-func 'generate-header-line)
 
+(defvar deer-back-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c C-s") 'deer)
+    map)
+  "deer-back-minor-mode keymap.")
+
+(define-minor-mode deer-back-minor-mode
+  "A minor mode to quickly go back to deer."
+  :init-value t
+  :lighter " deer-back")
+
+(deer-back-minor-mode 1)
+
 (windmove-default-keybindings 'meta)
 
 (require 'package)
