@@ -54,8 +54,10 @@
       (directory-path (cons directory path))
       (rendered-path
         (if in-ranger-mode directory-path (cons file directory-path))))
-    (string-join
-      (reverse rendered-path) (propertize "/" 'face '(:weight bold)))))
+    (mapconcat
+      'identity
+      (reverse rendered-path)
+      (propertize "/" 'face '(:weight bold)))))
 
 (add-hook 'buffer-list-update-hook
   (lambda () (setq header-line-format '(:eval (generate-header-line)))))
