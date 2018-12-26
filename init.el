@@ -1,3 +1,5 @@
+(setq custom-file (concat user-emacs-directory "custom.el"))
+
 (require 'mouse)
 (xterm-mouse-mode t)
 (defun track-mouse (e))
@@ -104,15 +106,3 @@ There are two things you can do about this warning:
     (add-to-list 'package-archives
       (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (ranger php-mode js2-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
