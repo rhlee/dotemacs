@@ -1,4 +1,4 @@
-(setq custom-file (concat user-emacs-directory "custom.el"))
+(load-file (setq custom-file (concat user-emacs-directory "custom.el")))
 
 (require 'mouse)
 (xterm-mouse-mode t)
